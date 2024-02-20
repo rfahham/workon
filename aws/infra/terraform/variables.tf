@@ -1,17 +1,17 @@
 variable "aws_region" {
-  type        = string
+  type = string
   # default     = "us-east-1"
   description = "Região onde será criada a instância"
 }
 
 variable "aws_profile" {
-  type        = string
+  type = string
   # default     = "terraform"
   description = "Profile do terraform que está sendo utilizado"
 }
 
 variable "aws_ami" {
-  type        = string
+  type = string
   # default     = "ami-0e731c8a588258d0d"
   description = "Imagem da instância"
 }
@@ -25,7 +25,7 @@ variable "instance_type" {
 variable "instance_tags" {
   type = map(string)
   default = {
-    Name = "aws-instance-workon"
+    Name    = "aws-instance-workon"
     Project = "Aplicando Terraform"
   }
   description = "Tags da instância"
@@ -35,4 +35,9 @@ variable "number_instances" {
   type        = number
   description = "Numero de instancias"
   default     = 1
+}
+
+variable "prefix_name" {
+  type        = string
+  description = "Type your name"
 }
