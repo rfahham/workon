@@ -1,0 +1,26 @@
+---
+- name: Setup NGINX Server
+  hosts: instances
+  remote_user: ec2-user
+  become: yes
+
+  tasks:
+  - name: yum update
+    yum:
+      update_cache: yes
+
+  - name: Install NGINX Packages
+    yum:
+      name: nginx
+      state: latest
+  
+  - name: Add workon page
+    copy:
+      src: index.html
+      dest: /usr/share/nginx/html/
+
+  - name: Start Service
+    service:
+      name: nginx
+      state: restarted
+      enabled: yes
