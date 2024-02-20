@@ -22,6 +22,10 @@ Passar o caminho completo com o usuário que irá conectar a instância
 ## Listar os Hosts
 
 ```bash
+aws ec2 describe-instances --profile terraform | grep PublicDnsName
+
+ou 
+
 ✗ ansible all -i hosts -m ping --list-hosts
   hosts (2):
     ec2-user@ec2-<IP>.compute-1.amazonaws.com
@@ -76,3 +80,4 @@ ec2-user@ec2-<IP>.compute-1.amazonaws.com | SUCCESS => {
 ```bash
 ansible-playbook ./playbooks/nginx.yaml
 ```
+

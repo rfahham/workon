@@ -15,11 +15,12 @@ provider "aws" {
 }
 
 resource "aws_instance" "web" {
-  count         = var.number_instances
-  ami           = var.aws_ami
-  instance_type = var.instance_type
-  tags          = var.instance_tags
-  key_name      = aws_key_pair.this.key_name
+  count                  = var.number_instances
+  ami                    = var.aws_ami
+  instance_type          = var.instance_type
+  tags                   = var.instance_tags
+  key_name               = aws_key_pair.this.key_name
+  vpc_security_group_ids = [aws_security_group.security_group.id]
 }
 
 #Generate private key
@@ -29,16 +30,13 @@ resource "aws_key_pair" "this" {
 }
 
 # Get my public ip
-# data "http" "ip" {
-#   url = "https://ipv4.icanhazip.com"
-# }
-
-# output "ip" {
-#   value = data.http.ip.response_body
-# }
+data "http" "ip" {
+  # url = "https://ipv4.icanhazip.com" quebra de linha
+  url = "https://api4.ipify.org"
+}
 
 #Security Group Resource
-resource "aws_security_group" "allow_port80" {
+resource "aws_security_group" "security_group" {
   name        = "${var.prefix_name}-sg"
   description = "Allow Inbound Traffic"
 
@@ -47,7 +45,7 @@ resource "aws_security_group" "allow_port80" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = ["179.233.117.115/32"]
+    cidr_blocks = ["${data.http.ip.response_body}/32"]
   }
 
   ingress {
@@ -55,7 +53,7 @@ resource "aws_security_group" "allow_port80" {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
-    cidr_blocks = ["179.233.117.115/32"]
+    cidr_blocks = ["${data.http.ip.response_body}/32"]
   }
 
   ingress {
@@ -63,7 +61,7 @@ resource "aws_security_group" "allow_port80" {
     from_port   = 9000
     to_port     = 9000
     protocol    = "tcp"
-    cidr_blocks = ["179.233.117.115/32"]
+    cidr_blocks = ["${data.http.ip.response_body}/32"]
   }
 
   ingress {
@@ -71,7 +69,7 @@ resource "aws_security_group" "allow_port80" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["179.233.117.115/32"]
+    cidr_blocks = ["${data.http.ip.response_body}/32"]
   }
 
   egress {
@@ -82,4 +80,3 @@ resource "aws_security_group" "allow_port80" {
     ipv6_cidr_blocks = ["::/0"]
   }
 }
-
