@@ -19,7 +19,7 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: terraform init $TERRAFORM_PATH
+        run: terraform -chdir=$TERRAFORM_PATH init 
       
       # - name: Terraform fmt
       #   id: fmt
