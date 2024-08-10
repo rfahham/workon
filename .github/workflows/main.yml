@@ -1,7 +1,7 @@
 name: Pipeline CI/CD
 
 env:
-  TERRAFORM_PATH: aws/infra/terraform
+  TERRAFORM_PATH: aws
 
 on:
   workflow_dispatch:
@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: "1.7.3"
+          terraform_version: "4.0"
 
       - name: Terraform Init
         id: init
