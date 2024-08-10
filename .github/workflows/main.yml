@@ -21,16 +21,15 @@ jobs:
         id: init
         run: terraform -chdir=$TERRAFORM_PATH init 
       
-      # - name: Terraform fmt
-      #   id: fmt
-      #   run: terraform fmt -check
-      #   continue-on-error: true
+      - name: Terraform fmt
+        id: fmt
+        run: terraform -chdir=$TERRAFORM_PATH fmt -check
+        continue-on-error: true
 
+      - name: Terraform Validate
+        id: validate
+        run: terraform -chdir=$TERRAFORM_PATH validate -no-color
 
-      # - name: Terraform Validate
-      #   id: validate
-      #   run: terraform validate -no-color
-
-      # - name: Terraform Plan
-      #   id: plan
-      #   run: terraform plan -no-color
+      - name: Terraform Plan
+        id: plan
+        run: terraform -chdir=$TERRAFORM_PATH plan -no-color
