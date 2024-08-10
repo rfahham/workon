@@ -1,7 +1,7 @@
 name: Pipeline CI/CD
 
 env:
-  TERRAFORM_PATH: aws/infra/terraform
+  TERRAFORM_PATH: ~/aws/infra/terraform
 
 on:
   workflow_dispatch:
