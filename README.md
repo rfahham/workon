@@ -14,8 +14,8 @@ Projeto de estudos e aplicações na AWS utilizando Terraform para subir a infra
 
 4 - Executar o terraform
 
-5 - Excutar o Ansible (instalar o NGINX e copia os arquivos para as instâncias)
+5 - Executar o Ansible (instalar o NGINX e copia os arquivos para as instâncias)
 
 6 - 
 
-7 - 
+7 - curl no endereço do LB retornando 200OK
