@@ -1,5 +1,8 @@
 name: Pipeline CI/CD
 
+env:
+  TERRAFORM_PATH: aws/infra/terraform
+
 on:
   workflow_dispatch:
   push:
@@ -16,7 +19,7 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: cd aws/infra/terraform && terraform init
+        run: terraform init $TERRAFORM_PATH
       
       # - name: Terraform fmt
       #   id: fmt
