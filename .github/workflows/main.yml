@@ -14,7 +14,8 @@ jobs:
 
       - name: Terraform Init
         id: init
-        run: terraform init
+        run |
+        cd aws/infra/terraform && terraform init
       
       # - name: Terraform fmt
       #   id: fmt
